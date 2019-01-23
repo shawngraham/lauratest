@@ -1211,4 +1211,3 @@ $.fn.followTo = function (pos) {
 };
 
 $('#legend').followTo(285);
-
