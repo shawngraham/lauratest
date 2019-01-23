@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from 127.0.0.1:8000/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 23 Jan 2019 01:51:41 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta charset="UTF-8">
+  <title>InPhO Topic Explorer</title>
+  <script>
+  // redirect for error introduced by CAS
+  if (window.location.href.includes('%3d'))
+    window.location.href = window.location.href.replace('%3d','=');
+  </script>
+
+  <script src="lib/jquery-2.2.4.min.js"></script>
+  <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+  <script src="lib/jquery.superdom.min.js"></script>
+  <script src="lib/jquery.cookie.min.js"></script>
+  <script src="lib/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+  <script src="lib/d3.v3.min.js"></script>
+  <script src="lib/mustache.js"></script>
+  <script src="lib/showdown.min.js"></script>
+  <script src="lib/inpho/util.js"></script>
+  <script src="fulltext.js"></script>
+  <script src="htrc.js"></script>
+  <script src="topicprint.js"></script>
+  <script src="icons.html"></script>
+  <link rel="stylesheet" type="text/css" href="lib/bootstrap-3.3.6/css/bootstrap.min.css" />
+  <!-- <link rel="stylesheet" type="text/css" href="/lib/bootstrap-2.3.2/css/bootstrap.min.css" /> -->
+  <link rel='stylesheet prefetch' href='css/simple-sidebar.css'>
+  <link rel='stylesheet prefetch' href='css/master.css'>
+  <link rel='stylesheet prefetch' href='css/inpho-font.css'>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="sidebar-wrapper">
+      <div id="sidebar-container" class="sidebar-helper sidebar-nav" style="grid-template-rows: 15% 70% 15%; height: 100vh;">
+        <!--<ul class="sidebar-nav">-->
+          <div id="top-btns">
+            <div id="selected" class="sidebar-elements"><a id="home-link" class="selected" data-placement="right" title="Home" href="index.html"><span class="glyphicon glyphicon-home"></span></a></div>
+            <!--<div>
+              <a class="selected" href="javascript:toggleSearch()"><span class="glyphicon glyphicon-search"></span></a>
+            </div>-->
+            <div id="selected" class="sidebar-elements"><a class="selected" id="cluster-link" title="Topic cluster view" data-placement="right" href="topics.html"><span class="icon-scatter"></span></a></div>
+          </div>
+          <div id="center-btns">
+            <div class="sidebar-elements"><a class="topic-link" href="20/index.html" title="Launch 20-topic model" data-placement="right">20</a></div>
+            <div class="sidebar-elements"><a class="topic-link" href="40/index.html" title="Launch 40-topic model" data-placement="right">40</a></div>
+            <div class="sidebar-elements"><a class="topic-link" href="60/index.html" title="Launch 60-topic model" data-placement="right">60</a></div>
+            <div class="sidebar-elements"><a class="topic-link" href="80/index.html" title="Launch 80-topic model" data-placement="right">80</a></div>
+          </div>
+          <div id="bottom-btns">
+            <div id="selected" class="sidebar-elements"><a id="helper" href="#" class="selected" data-placement="right" title="Help" data-toggle="modal" data-target="#helpModal"><strong>?</strong></a></div>
+            <div id="selected" class="sidebar-elements"><a href="#" class="selected" data-placement="right" title="Usage" data-toggle="modal" data-target="#rightsModal"><strong class="cc-font">cb</strong></a></div>
+          </div>
+        <!--</ul>-->
+      </div>
+    </div>
+  
+    <script>
+    var ks = [20, 40, 60, 80, ];
+    $('#sidebar-wrapper li a').tooltip();
+    </script>
+    
+    <div id="page-content-wrapper">
+      <link rel="stylesheet" type="text/css" href="css/splash.css" />
+<script src="lib/jquery-2.2.4.min.js"></script>
+<script src="lib/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+<script src="lib/bootstrap-2.3.2/js/bootstrap.min.js"></script>
+    <div id="main" class="container">
+      <div class="row" id="top">
+        <div class="col-md-12">
+          <h1><a href="index.html"><span class="logo-word">InPhO</span> Topic Explorer</a></h1>
+          <h2>
+            <a href="None.html">laura's stuff</a> 
+             <br />
+            <small><a href="#about">About this corpus <span class="glyphicon glyphicon-arrow-down"></span></a></small></h2>
+          <p style="font-size: 28px; text-align: center;">Topic models are about contexts, rather than individual words.<br />
+          We search a topic model using full documents, rather than keywords.<br /><strong>Enter the model by one of the following methods:</strong></p>
+        </div>
+        <div class="col-sm-4 col-xs-12 entry">
+          <a class="btn btn-primary col-xs-12"  data-toggle="modal" data-target="#fingerprintModal">
+            <span class="glyphicon glyphicon-file"  style="font-size: 10vw; padding-left: 1vw;"></span><br />Document
+          </a>
+        </div>
+        <div class="col-sm-4 col-xs-12 entry">
+          <a class="btn btn-primary col-xs-12" data-toggle="modal" data-target="#topicModal"><span class="icon-scatter"  style="font-size: 10vw; line-height: 0.9" ></span><br />Topic</a>
+        </div>
+        <div class="col-sm-4 col-xs-12 entry"> 
+          <button class="btn btn-primary col-xs-12" disabled="">
+          <span class="glyphicon glyphicon-open"  style="font-size: 10vw; padding-left: 0.5vw;"></span><br />Upload &beta;
+          </button>
+        </div>
+        </div>
+      <div class="row" id="about">
+        <div class="col-xs-8 col-xs-offset-2">
+          <h2>About this corpus<br />
+          <a href="#top"><small>Back to top <span class="glyphicon glyphicon-arrow-up"> </span></small></a></h2>
+          <div id="aboutText">
+          
+          </div>
+          <h2 class="back"><a href="#top"><small>Back to top <span class="glyphicon glyphicon-arrow-up"> </span></small></a></h2>
+        </div>
+      </div>
+      <!-- <div class="row" id="brand">
+         <div class="md-col-12">
+           <h2 style="text-align: center;">Powered by:</h2>
+                <div id="brandWord"><h1 style="text-align: center;"><a href="http://inphodata.cogs.indiana.edu"><span class="logo-word">InPhO</span> Topic Explorer</a></h1></div>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="fingerprintModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">Document search</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal col-sm-12">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="hidden" name="doc" id="hidden_id">
+              <input type="text" id="doc" class="form-control typeahead" placeholder="Click button on right to select random document →" autocomplete="off">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="button" id="randomDoc" data-original-title="" title=""><span class="glyphicon glyphicon-random"></span></button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <hr />
+        <h4><img src="img/icon-fingerprint.png" alt="Fingerprint icon" /> Topic Fingerprint </h4>
+        <p>The topic bars below show the composition of the selected document in different models. Scroll over the bars to see the most likely words in each topic. Click on a bar to open the Topic Explorer for that model focused on this document.</p>
+        <div id="loading" class="text-center" style="display: none;">
+          <button class="btn btn-lg btn-info">
+            <span class="glyphicon glyphicon-refresh spinning"></span> Loading...    
+          </button>
+        </div>
+        <div id="topicBars">
+          <dl id="singleBarsDl"  class="dl-horizontal">
+          </dl>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="topicModal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">Topic search</h3>
+      </div>
+      <div class="modal-body">
+        <form class="form-horizontal col-sm-12">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" id="words" class="form-control" placeholder="Type words to select topics." autocomplete="off">
+              <div class="input-group-btn">
+                <a id="wordsBtn2" type="button" class="btn btn-primary" href="topics.html"><span class="icon-scatter"></span> View topic clusters</a>
+              </div>
+            </div>
+          </div>
+        </form>
+        <p>After typing words above, the topics most likely to generate that word will appear below. Clicking "View topic clusters" will go to a view of the topic space, weighted by the terms in the box. This makes it easy to find groups of topics related to your interests.</p>
+        <div id="wordsDl">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <a id="wordsBtn" type="button" class="btn btn-primary" href="topics.html"><span class="icon-scatter"></span> View topic clusters</a>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+    
+
+
+<script src="topicprint.js"></script>
+ 
+
+
+
+    </div>
+  </div>
+  <div class="modal fade" tabindex="-1" role="dialog" id="rightsModal">
+    <div class="modal-dialog" role="document copyright">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title">Usage and Copyright</h3>
+        </div>
+        <div class="modal-body">
+          <p>The InPhO Topic Explorer (InPhO-TE) software is &copy; 2014-16 Trustees of Indiana University and the Indiana Philosophy Ontology (InPhO) Project.</p>
+          <p>While copyright is reserved, the software itself is released via the permissive <a href="https://github.com/inpho/topic-explorer/blob/master/LICENSE.txt" target="_blank">MIT License</a>, with open-source code available via <a href="https://github.com/inpho/topic-explorer/">GitHub</a>.</p>
+          <p>Explicit rights are granted for reuse of all visualizations and other derivatives of this software via the <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> (CC-BY).</p>
+          <p>To satisfy the license in electronic works, please link to the primary project page at <a href="http://inphodata.cogs.indiana.edu/">http://inphodata.cogs.indiana.edu/</a>. If you use InPhO-TE in a published work, the authors request that you cite InPhO-TE as:
+              <blockquote style="font-size: inherit;">Jaimie Murdock and Colin Allen. (2015) "Visualization Techniques for Topic Model Checking" in Proceedings of the 29th AAAI Conference on Artificial Intelligence (AAAI-15). Austin, Texas, USA, January 25-29, 2015. http://inphodata.cogs.indiana.edu/</blockquote></p>
+          <p>Content for each corpus is copyright by their respective creators. Topic models performed using this content fall under fair use provisions as non-consumptive research.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal #rightsModal -->
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="homeHelp">
+    <div class="modal-dialog" role="document copyright">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title">Help</h3>
+        </div>
+        <div class="modal-body" id="homeHelpText">
+          <script>
+            var converter = new showdown.Converter({
+               simplifiedAutoLink: true,
+               headerLevelStart : 3,
+               literalMidWordUnderscores: true,
+               strikethrough: true,
+               tables: true
+              });
+            $.get("/help-home.md").
+              done(function(data) { 
+                    var html = converter.makeHtml(data);
+                    $('#homeHelpText').html(html);
+                  }).fail(function(data) { $('#homeHelpText').html('No help found for this page.'); });
+          </script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal #rightsModal -->
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="hypershelfHelp">
+    <div class="modal-dialog" role="document copyright">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title">Hypershelf Help</h3>
+        </div>
+        <div class="modal-body" id="hypershelfHelpText">
+        	<script>
+            var converter = new showdown.Converter({
+               simplifiedAutoLink: true,
+               headerLevelStart : 3,
+               literalMidWordUnderscores: true,
+               strikethrough: true,
+               tables: true
+              });
+            $.get("/help-hypershelf.md").
+        		  done(function(data) { 
+                    var html = converter.makeHtml(data);
+                    $('#hypershelfHelpText').html(html);
+                  }).fail(function(data) { $('#hypershelfHelpText').html('No help found for this page.'); });
+        	</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal #rightsModal -->
+
+  <div class="modal fade" tabindex="-1" role="dialog" id="topicsHelp">
+    <div class="modal-dialog" role="document copyright">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title">Help</h3>
+        </div>
+        <div class="modal-body" id="topicsHelpText">
+          <script>
+            var converter = new showdown.Converter({
+               simplifiedAutoLink: true,
+               headerLevelStart : 3,
+               literalMidWordUnderscores: true,
+               strikethrough: true,
+               tables: true
+              });
+            $.get("/help-topics.md").
+              done(function(data) { 
+                    var html = converter.makeHtml(data);
+                    $('#topicsHelpText').html(html);
+                  }).fail(function(data) { $('#topicsHelpText').html('No help found for this page.'); });
+          </script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal #rightsModal -->
+  
+  <script>
+    var path = window.location.pathname;
+    if (path == "index.html") {
+      $("#helper").removeAttr("data-target");
+      $("#helper").attr("data-target", "#homeHelp");
+    }
+    console.log(path.match(/\/\d+\//));
+    if (path.match(/\/\d+\//)) {
+      $("#helper").removeAttr("data-target");
+      $("#helper").attr("data-target", "#hypershelfHelp");
+    }
+    if (path == "/topics") {
+      $("#helper").removeAttr("data-target");
+      $("#helper").attr("data-target", "#topicsHelp");
+    }
+  </script>
+</body>
+
+<!-- Mirrored from 127.0.0.1:8000/ by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 23 Jan 2019 01:52:16 GMT -->
+</html>
